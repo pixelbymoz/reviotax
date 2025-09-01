@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
+import { PrivacyDisclaimer } from '../components/PrivacyDisclaimer';
 import { TrendingUp, TrendingDown, Calculator, FileText, DollarSign, Percent } from 'lucide-react';
 import { formatCurrency, formatPercentage } from '../utils/formatters';
 import { TaxCalculation } from '../types';
@@ -51,6 +52,8 @@ export function Dashboard({ taxCalculation, onNavigate }: DashboardProps) {
           Pantau perhitungan pajak Anda dan dapatkan wawasan untuk penghasilan freelancer & content creator
         </p>
       </div>
+
+      <PrivacyDisclaimer />
 
       {!taxCalculation ? (
         <Card className="text-center">
