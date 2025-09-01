@@ -17,7 +17,7 @@ export function PrivacyDisclaimer() {
           </div>
           <p className="text-sm text-green-700">
             <strong>Data hanya diproses di browser Anda, tidak disimpan di server.</strong> 
-            Semua perhitungan pajak dilakukan secara lokal untuk menjaga kerahasiaan informasi keuangan Anda.
+             Semua perhitungan pajak dilakukan secara lokal untuk menjaga kerahasiaan informasi keuangan Anda.
           </p>
         </div>
       </div>
