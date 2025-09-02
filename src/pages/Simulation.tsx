@@ -51,8 +51,8 @@ export function Simulation({ profile, incomeSources, operationalCosts, originalC
   ];
 
   return (
-    <div className="ml-64 min-h-screen bg-gray-50">
-      <div className="p-8 max-w-6xl mx-auto">
+    <div className="min-h-screen bg-gray-50">
+      <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Simulasi Pajak</h1>
         <p className="text-gray-600 mt-2">
@@ -60,7 +60,7 @@ export function Simulation({ profile, incomeSources, operationalCosts, originalC
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
         {/* Simulation Controls */}
         <Card>
           <h2 className="text-xl font-semibold text-gray-900 mb-6">Parameter Simulasi</h2>
@@ -95,7 +95,7 @@ export function Simulation({ profile, incomeSources, operationalCosts, originalC
               <label className="block text-sm font-medium text-gray-700 mb-3">
                 Skenario Cepat
               </label>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {scenarios.map((scenario) => (
                   <Button
                     key={scenario.name}
@@ -105,6 +105,7 @@ export function Simulation({ profile, incomeSources, operationalCosts, originalC
                       setSimulationIncome(scenario.income);
                       setSimulationCosts(scenario.costs);
                     }}
+                    className="transition-all duration-200 hover:scale-105"
                   >
                     {scenario.name}
                   </Button>
@@ -121,7 +122,7 @@ export function Simulation({ profile, incomeSources, operationalCosts, originalC
           {simulationIncome > 0 ? (
             <div className="space-y-6">
               {/* Key Metrics */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="bg-blue-50 p-4 rounded-lg">
                   <p className="text-sm text-blue-600 font-medium">Penghasilan Bersih</p>
                   <p className="text-lg font-bold text-blue-900">
@@ -143,12 +144,12 @@ export function Simulation({ profile, incomeSources, operationalCosts, originalC
               {/* Tax Comparison */}
               <div className="space-y-3">
                 <div className={`p-4 rounded-lg border-2 ${simulationCalculation.recommendedOption === 'progressive' ? 'border-teal-500 bg-teal-50' : 'border-gray-200'}`}>
-                  <div className="flex justify-between items-center">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
                       <h4 className="font-medium">Pajak Progresif</h4>
                       <p className="text-sm text-gray-600">PPh 21 (5% - 35%)</p>
                     </div>
-                    <div className="text-right">
+                    <div className="text-left sm:text-right">
                       <p className="font-bold">{formatCurrency(simulationCalculation.progressiveTax)}</p>
                       {simulationCalculation.recommendedOption === 'progressive' && (
                         <span className="text-xs text-teal-600">Disarankan</span>
@@ -158,12 +159,12 @@ export function Simulation({ profile, incomeSources, operationalCosts, originalC
                 </div>
 
                 <div className={`p-4 rounded-lg border-2 ${simulationCalculation.recommendedOption === 'final' ? 'border-teal-500 bg-teal-50' : 'border-gray-200'}`}>
-                  <div className="flex justify-between items-center">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
                       <h4 className="font-medium">PPh Final UMKM</h4>
                       <p className="text-sm text-gray-600">0,5% dari penghasilan kotor</p>
                     </div>
-                    <div className="text-right">
+                    <div className="text-left sm:text-right">
                       <p className="font-bold">{formatCurrency(simulationCalculation.finalTax)}</p>
                       {simulationCalculation.recommendedOption === 'final' && (
                         <span className="text-xs text-teal-600">Disarankan</span>
@@ -175,7 +176,7 @@ export function Simulation({ profile, incomeSources, operationalCosts, originalC
 
               {/* Effective Tax Rate */}
               <div className="bg-gray-50 p-4 rounded-lg">
-                <div className="flex justify-between">
+                <div className="flex flex-col sm:flex-row justify-between gap-2">
                   <span className="text-gray-600">Tarif Pajak Efektif:</span>
                   <span className="font-bold">
                     {formatPercentage(
@@ -191,7 +192,7 @@ export function Simulation({ profile, incomeSources, operationalCosts, originalC
 
               {/* Monthly Payment */}
               <div className="bg-teal-50 p-4 rounded-lg">
-                <div className="flex justify-between">
+                <div className="flex flex-col sm:flex-row justify-between gap-2">
                   <span className="text-teal-700 font-medium">Pembayaran Pajak Bulanan:</span>
                   <span className="font-bold text-teal-900">
                     {formatCurrency(simulationCalculation.monthlyTax)}
@@ -214,7 +215,7 @@ export function Simulation({ profile, incomeSources, operationalCosts, originalC
         <Card className="mt-8">
           <h2 className="text-xl font-semibold text-gray-900 mb-6">Perbandingan dengan Saat Ini</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             <div className="text-center">
               <div className="flex items-center justify-center mb-2">
                 {simulationCalculation.grossIncome > originalCalculation.grossIncome ? (
@@ -250,7 +251,7 @@ export function Simulation({ profile, incomeSources, operationalCosts, originalC
               </p>
             </div>
 
-            <div className="text-center">
+            <div className="text-center sm:col-span-2 lg:col-span-1">
               <div className="flex items-center justify-center mb-2">
                 <span className="text-sm text-gray-600">Perubahan Penghasilan Setelah Pajak</span>
               </div>

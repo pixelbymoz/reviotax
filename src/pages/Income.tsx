@@ -91,8 +91,8 @@ export function Income({ incomeSources, operationalCosts, onUpdateIncome }: Inco
   }, 0);
 
   return (
-    <div className="ml-64 min-h-screen bg-gray-50">
-      <div className="p-8 max-w-6xl mx-auto">
+    <div className="min-h-screen bg-gray-50">
+      <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Penghasilan & Biaya</h1>
         <p className="text-gray-600 mt-2">
@@ -101,22 +101,22 @@ export function Income({ incomeSources, operationalCosts, onUpdateIncome }: Inco
       </div>
 
       {/* Summary */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
         <Card padding="sm">
           <h3 className="text-sm font-medium text-gray-600">Total Penghasilan Tahunan</h3>
-          <p className="text-2xl font-bold text-green-600">{formatCurrency(totalAnnualIncome)}</p>
+          <p className="text-xl sm:text-2xl font-bold text-green-600">{formatCurrency(totalAnnualIncome)}</p>
         </Card>
         <Card padding="sm">
           <h3 className="text-sm font-medium text-gray-600">Total Biaya Tahunan</h3>
-          <p className="text-2xl font-bold text-red-600">{formatCurrency(totalAnnualCosts)}</p>
+          <p className="text-xl sm:text-2xl font-bold text-red-600">{formatCurrency(totalAnnualCosts)}</p>
         </Card>
         <Card padding="sm">
           <h3 className="text-sm font-medium text-gray-600">Penghasilan Bersih Tahunan</h3>
-          <p className="text-2xl font-bold text-blue-600">{formatCurrency(totalAnnualIncome - totalAnnualCosts)}</p>
+          <p className="text-xl sm:text-2xl font-bold text-blue-600">{formatCurrency(totalAnnualIncome - totalAnnualCosts)}</p>
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
         {/* Income Sources */}
         <div>
           <Card>
@@ -148,7 +148,7 @@ export function Income({ incomeSources, operationalCosts, onUpdateIncome }: Inco
                 />
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Jumlah (Rp) <span className="text-red-500">*</span></label>
                   <NumberInput
@@ -171,7 +171,7 @@ export function Income({ incomeSources, operationalCosts, onUpdateIncome }: Inco
                 </div>
               </div>
               
-              <Button onClick={addIncomeSource}>
+              <Button onClick={addIncomeSource} className="w-full sm:w-auto">
                 <Plus className="mr-2 h-4 w-4" />
                 Tambah Sumber Penghasilan
               </Button>
@@ -184,11 +184,11 @@ export function Income({ incomeSources, operationalCosts, onUpdateIncome }: Inco
                 const Icon = typeOption?.icon || DollarSign;
                 
                 return (
-                  <div key={source.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <div className="flex items-center space-x-3">
+                  <div key={source.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-gray-50 rounded-lg gap-3 sm:gap-0">
+                    <div className="flex items-center space-x-3 min-w-0 flex-1">
                       <Icon className="h-5 w-5 text-gray-400" />
-                      <div>
-                        <p className="font-medium text-gray-900">{source.name}</p>
+                      <div className="min-w-0 flex-1">
+                        <p className="font-medium text-gray-900 truncate">{source.name}</p>
                         <p className="text-sm text-gray-600">
                           {formatCurrency(source.amount)} {source.frequency}
                         </p>
@@ -196,7 +196,7 @@ export function Income({ incomeSources, operationalCosts, onUpdateIncome }: Inco
                     </div>
                     <button
                       onClick={() => removeIncomeSource(source.id)}
-                      className="text-red-500 hover:text-red-700 transition-colors"
+                      className="text-red-500 hover:text-red-700 transition-colors p-2 hover:bg-red-50 rounded-md flex-shrink-0"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
@@ -242,7 +242,7 @@ export function Income({ incomeSources, operationalCosts, onUpdateIncome }: Inco
                 />
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Jumlah (Rp) <span className="text-red-500">*</span></label>
                   <NumberInput
@@ -265,7 +265,7 @@ export function Income({ incomeSources, operationalCosts, onUpdateIncome }: Inco
                 </div>
               </div>
               
-              <Button onClick={addOperationalCost} variant="secondary">
+              <Button onClick={addOperationalCost} variant="secondary" className="w-full sm:w-auto">
                 <Plus className="mr-2 h-4 w-4" />
                 Tambah Biaya Operasional
               </Button>
@@ -278,11 +278,11 @@ export function Income({ incomeSources, operationalCosts, onUpdateIncome }: Inco
                 const Icon = typeOption?.icon || DollarSign;
                 
                 return (
-                  <div key={cost.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <div className="flex items-center space-x-3">
+                  <div key={cost.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-gray-50 rounded-lg gap-3 sm:gap-0">
+                    <div className="flex items-center space-x-3 min-w-0 flex-1">
                       <Icon className="h-5 w-5 text-gray-400" />
-                      <div>
-                        <p className="font-medium text-gray-900">{cost.name}</p>
+                      <div className="min-w-0 flex-1">
+                        <p className="font-medium text-gray-900 truncate">{cost.name}</p>
                         <p className="text-sm text-gray-600">
                           {formatCurrency(cost.amount)} {cost.frequency}
                         </p>
@@ -290,7 +290,7 @@ export function Income({ incomeSources, operationalCosts, onUpdateIncome }: Inco
                     </div>
                     <button
                       onClick={() => removeOperationalCost(cost.id)}
-                      className="text-red-500 hover:text-red-700 transition-colors"
+                      className="text-red-500 hover:text-red-700 transition-colors p-2 hover:bg-red-50 rounded-md flex-shrink-0"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>

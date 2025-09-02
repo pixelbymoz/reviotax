@@ -37,8 +37,8 @@ export function Onboarding({ profile, onSaveProfile }: OnboardingProps) {
   ];
 
   return (
-    <div className="ml-64 min-h-screen bg-gray-50">
-      <div className="p-8 max-w-2xl mx-auto">
+    <div className="min-h-screen bg-gray-50">
+      <div className="p-4 sm:p-6 lg:p-8 max-w-2xl mx-auto">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Pengaturan Profil Pajak</h1>
         <p className="text-gray-600 mt-2">
@@ -69,13 +69,13 @@ export function Onboarding({ profile, onSaveProfile }: OnboardingProps) {
             <label className="block text-sm font-medium text-gray-700 mb-3">
               Status Pernikahan <span className="text-red-500">*</span>
             </label>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {maritalOptions.map((option) => {
                 const Icon = option.icon;
                 return (
                   <label
                     key={option.value}
-                    className={`relative flex flex-col p-4 border-2 rounded-lg cursor-pointer transition-colors ${
+                    className={`relative flex flex-col p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 hover:scale-105 ${
                       formData.maritalStatus === option.value
                         ? 'border-teal-500 bg-teal-50'
                         : 'border-gray-200 hover:border-gray-300'
@@ -137,7 +137,7 @@ export function Onboarding({ profile, onSaveProfile }: OnboardingProps) {
             </p>
           </div>
 
-          <div className="flex justify-end">
+          <div className="flex justify-center sm:justify-end">
             <Button type="submit" size="lg">
               Simpan Profil Pajak
             </Button>
