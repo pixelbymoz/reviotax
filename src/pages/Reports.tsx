@@ -207,8 +207,8 @@ export function Reports({ profile, taxCalculation }: ReportsProps) {
   }
 
   return (
-    <div className="ml-64 min-h-screen bg-gray-50">
-      <div className="p-8 max-w-6xl mx-auto">
+    <div className="min-h-screen bg-gray-50">
+      <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Laporan Pajak</h1>
         <p className="text-gray-600 mt-2">
@@ -217,12 +217,12 @@ export function Reports({ profile, taxCalculation }: ReportsProps) {
       </div>
 
       {/* Export Actions */}
-      <div className="flex gap-4 mb-8">
-        <Button onClick={generatePDFReport}>
+      <div className="flex flex-col sm:flex-row gap-4 mb-8">
+        <Button onClick={generatePDFReport} className="transition-all duration-200 hover:scale-105">
           <Download className="mr-2 h-4 w-4" />
           Ekspor sebagai PDF
         </Button>
-        <Button variant="outline" onClick={generateExcelReport}>
+        <Button variant="outline" onClick={generateExcelReport} className="transition-all duration-200 hover:scale-105">
           <Download className="mr-2 h-4 w-4" />
           Ekspor sebagai Excel
         </Button>
@@ -239,7 +239,7 @@ export function Reports({ profile, taxCalculation }: ReportsProps) {
           {/* Taxpayer Information */}
           <div className="bg-gray-50 p-6 rounded-lg mb-6">
             <h3 className="font-medium text-gray-900 mb-4">Informasi Wajib Pajak</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <div>
                 <span className="text-gray-600">Nama:</span>
                 <span className="ml-2 font-medium">{profile.name}</span>
@@ -263,30 +263,30 @@ export function Reports({ profile, taxCalculation }: ReportsProps) {
           <div className="space-y-4">
             <h3 className="font-medium text-gray-900">Ringkasan Penghasilan & Pajak</h3>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
               {/* Income Breakdown */}
               <div className="space-y-3">
                 <h4 className="text-sm font-medium text-gray-700">Rincian Penghasilan</h4>
                 <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
+                  <div className="flex justify-between items-center">
                     <span className="text-gray-600">Penghasilan Kotor Tahunan:</span>
-                    <span className="font-medium">{formatCurrency(taxCalculation.grossIncome)}</span>
+                    <span className="font-medium text-right">{formatCurrency(taxCalculation.grossIncome)}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between items-center">
                     <span className="text-gray-600">Biaya Operasional:</span>
-                    <span className="font-medium">({formatCurrency(taxCalculation.operationalCosts)})</span>
+                    <span className="font-medium text-right">({formatCurrency(taxCalculation.operationalCosts)})</span>
                   </div>
-                  <div className="flex justify-between border-t pt-2">
+                  <div className="flex justify-between items-center border-t pt-2">
                     <span className="text-gray-600">Penghasilan Bersih:</span>
-                    <span className="font-medium">{formatCurrency(taxCalculation.netIncome)}</span>
+                    <span className="font-medium text-right">{formatCurrency(taxCalculation.netIncome)}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between items-center">
                     <span className="text-gray-600">PTKP (Bebas Pajak):</span>
-                    <span className="font-medium">({formatCurrency(taxCalculation.ptkp)})</span>
+                    <span className="font-medium text-right">({formatCurrency(taxCalculation.ptkp)})</span>
                   </div>
-                  <div className="flex justify-between border-t pt-2 font-bold">
+                  <div className="flex justify-between items-center border-t pt-2 font-bold">
                     <span>Penghasilan Kena Pajak (PKP):</span>
-                    <span>{formatCurrency(taxCalculation.taxableIncome)}</span>
+                    <span className="text-right">{formatCurrency(taxCalculation.taxableIncome)}</span>
                   </div>
                 </div>
               </div>
@@ -296,7 +296,7 @@ export function Reports({ profile, taxCalculation }: ReportsProps) {
                 <h4 className="text-sm font-medium text-gray-700">Opsi Pajak</h4>
                 <div className="space-y-2 text-sm">
                   <div className={`p-3 rounded ${taxCalculation.recommendedOption === 'progressive' ? 'bg-teal-50 border border-teal-200' : 'bg-gray-50'}`}>
-                    <div className="flex justify-between items-center">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                       <span className="font-medium">Pajak Progresif (PPh 21):</span>
                       <span className="font-bold">{formatCurrency(taxCalculation.progressiveTax)}</span>
                     </div>
@@ -306,7 +306,7 @@ export function Reports({ profile, taxCalculation }: ReportsProps) {
                   </div>
                   
                   <div className={`p-3 rounded ${taxCalculation.recommendedOption === 'final' ? 'bg-teal-50 border border-teal-200' : 'bg-gray-50'}`}>
-                    <div className="flex justify-between items-center">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                       <span className="font-medium">PPh Final UMKM (0,5%):</span>
                       <span className="font-bold">{formatCurrency(taxCalculation.finalTax)}</span>
                     </div>
@@ -326,7 +326,7 @@ export function Reports({ profile, taxCalculation }: ReportsProps) {
               <div className="overflow-x-auto">
                 <div className="space-y-2 min-w-full">
                   {taxCalculation.taxBreakdown.map((bracket, index) => (
-                    <div key={index} className="flex justify-between text-sm">
+                    <div key={index} className="flex flex-col sm:flex-row justify-between text-sm gap-1">
                       <span className="text-gray-600">
                         {formatPercentage(bracket.rate)} on {formatCurrency(bracket.min)} 
                         {bracket.max ? ` - ${formatCurrency(bracket.max)}` : '+'}:
@@ -343,7 +343,7 @@ export function Reports({ profile, taxCalculation }: ReportsProps) {
           <div className="mt-6 pt-6 border-t border-gray-200">
             <h3 className="font-medium text-gray-900 mb-4">Jadwal Pembayaran yang Disarankan</h3>
             <div className="bg-blue-50 p-4 rounded-lg">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-blue-600 font-medium">Angsuran Bulanan:</span>
                   <p className="text-lg font-bold text-blue-900">{formatCurrency(taxCalculation.monthlyTax)}</p>
@@ -367,7 +367,7 @@ export function Reports({ profile, taxCalculation }: ReportsProps) {
           {/* Key Metrics */}
           <div className="mt-6 pt-6 border-t border-gray-200">
             <h3 className="font-medium text-gray-900 mb-4">Indikator Kinerja Utama</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className="bg-green-50 p-4 rounded-lg text-center">
                 <p className="text-sm text-green-600">Tarif Pajak Efektif</p>
                 <p className="text-xl font-bold text-green-900">
@@ -420,29 +420,29 @@ export function Reports({ profile, taxCalculation }: ReportsProps) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
             <div>
               <h4 className="font-medium text-gray-900 mb-3">Kolom Formulir 1770S</h4>
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
+                <div className="flex justify-between items-center">
                   <span className="text-gray-600">Penghasilan Kotor (Baris 1):</span>
-                  <span className="font-mono">{formatCurrency(taxCalculation.grossIncome)}</span>
+                  <span className="font-mono text-right">{formatCurrency(taxCalculation.grossIncome)}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between items-center">
                   <span className="text-gray-600">Biaya yang Dapat Dikurangkan (Baris 2):</span>
-                  <span className="font-mono">{formatCurrency(taxCalculation.operationalCosts)}</span>
+                  <span className="font-mono text-right">{formatCurrency(taxCalculation.operationalCosts)}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between items-center">
                   <span className="text-gray-600">Penghasilan Bersih (Baris 3):</span>
-                  <span className="font-mono">{formatCurrency(taxCalculation.netIncome)}</span>
+                  <span className="font-mono text-right">{formatCurrency(taxCalculation.netIncome)}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between items-center">
                   <span className="text-gray-600">PTKP (Baris 4):</span>
-                  <span className="font-mono">{formatCurrency(taxCalculation.ptkp)}</span>
+                  <span className="font-mono text-right">{formatCurrency(taxCalculation.ptkp)}</span>
                 </div>
-                <div className="flex justify-between font-bold">
+                <div className="flex justify-between items-center font-bold">
                   <span>Penghasilan Kena Pajak (Baris 5):</span>
-                  <span className="font-mono">{formatCurrency(taxCalculation.taxableIncome)}</span>
+                  <span className="font-mono text-right">{formatCurrency(taxCalculation.taxableIncome)}</span>
                 </div>
               </div>
             </div>
@@ -450,17 +450,17 @@ export function Reports({ profile, taxCalculation }: ReportsProps) {
             <div>
               <h4 className="font-medium text-gray-900 mb-3">Perhitungan Pajak</h4>
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
+                <div className="flex justify-between items-center">
                   <span className="text-gray-600">PPh 21 (Progresif):</span>
-                  <span className="font-mono">{formatCurrency(taxCalculation.progressiveTax)}</span>
+                  <span className="font-mono text-right">{formatCurrency(taxCalculation.progressiveTax)}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between items-center">
                   <span className="text-gray-600">Alternatif PPh Final:</span>
-                  <span className="font-mono">{formatCurrency(taxCalculation.finalTax)}</span>
+                  <span className="font-mono text-right">{formatCurrency(taxCalculation.finalTax)}</span>
                 </div>
-                <div className="flex justify-between font-bold border-t pt-2">
+                <div className="flex justify-between items-center font-bold border-t pt-2">
                   <span>Pajak Terutang yang Disarankan:</span>
-                  <span className="font-mono">
+                  <span className="font-mono text-right">
                     {formatCurrency(
                       taxCalculation.recommendedOption === 'progressive' 
                         ? taxCalculation.progressiveTax 

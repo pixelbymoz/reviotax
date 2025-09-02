@@ -3,8 +3,8 @@ import { Card } from '../components/Card';
 
 export function About() {
   return (
-    <div className="ml-64 min-h-screen bg-gray-50">
-      <div className="p-8">
+    <div className="min-h-screen bg-gray-50">
+      <div className="p-4 sm:p-6 lg:p-8">
       <Card>
         <h1 className="text-3xl font-bold text-gray-900 mb-4">Tentang Reviotax</h1>
         <div className="prose text-gray-600">

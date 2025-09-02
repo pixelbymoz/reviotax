@@ -44,8 +44,8 @@ export function Dashboard({ taxCalculation, onNavigate }: DashboardProps) {
   ] : [];
 
   return (
-    <div className="ml-64 min-h-screen bg-gray-50">
-      <div className="p-8">
+    <div className="min-h-screen bg-gray-50">
+      <div className="p-4 sm:p-6 lg:p-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Beranda</h1>
         <p className="text-gray-600 mt-2">
@@ -63,7 +63,7 @@ export function Dashboard({ taxCalculation, onNavigate }: DashboardProps) {
             <p className="text-gray-600 mb-8 max-w-md mx-auto">
               Atur profil pajak Anda dan tambahkan sumber penghasilan untuk melihat perhitungan pajak dan rekomendasi yang detail.
             </p>
-            <div className="flex gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button onClick={() => onNavigate('onboarding')}>
                 Atur Profil Pajak
               </Button>
@@ -81,13 +81,13 @@ export function Dashboard({ taxCalculation, onNavigate }: DashboardProps) {
               const Icon = stat.icon;
               return (
                 <Card key={stat.name} padding="sm">
-                  <div className="flex items-center">
+                  <div className="flex items-center space-x-3">
                     <div className={`p-3 rounded-lg ${stat.bgColor}`}>
                       <Icon className={`h-6 w-6 ${stat.color}`} />
                     </div>
-                    <div className="ml-4">
-                      <p className="text-sm font-medium text-gray-600">{stat.name}</p>
-                      <p className="text-xl font-semibold text-gray-900">{stat.value}</p>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs sm:text-sm font-medium text-gray-600 truncate">{stat.name}</p>
+                      <p className="text-lg sm:text-xl font-semibold text-gray-900">{stat.value}</p>
                     </div>
                   </div>
                 </Card>
@@ -96,17 +96,17 @@ export function Dashboard({ taxCalculation, onNavigate }: DashboardProps) {
           </div>
 
           {/* Tax Comparison */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
             <Card>
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Perbandingan Opsi Pajak</h3>
               <div className="space-y-4">
                 <div className={`p-4 rounded-lg border-2 ${taxCalculation.recommendedOption === 'progressive' ? 'border-teal-500 bg-teal-50' : 'border-gray-200'}`}>
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
                       <h4 className="font-medium text-gray-900">Pajak Progresif (PPh 21)</h4>
                       <p className="text-sm text-gray-600">5% - 35% berdasarkan lapisan penghasilan</p>
                     </div>
-                    <div className="text-right">
+                    <div className="text-left sm:text-right">
                       <p className="font-bold text-lg">{formatCurrency(taxCalculation.progressiveTax)}</p>
                       {taxCalculation.recommendedOption === 'progressive' && (
                         <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-teal-100 text-teal-800">
@@ -118,12 +118,12 @@ export function Dashboard({ taxCalculation, onNavigate }: DashboardProps) {
                 </div>
 
                 <div className={`p-4 rounded-lg border-2 ${taxCalculation.recommendedOption === 'final' ? 'border-teal-500 bg-teal-50' : 'border-gray-200'}`}>
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
                       <h4 className="font-medium text-gray-900">PPh Final UMKM</h4>
                       <p className="text-sm text-gray-600">0,5% dari penghasilan kotor</p>
                     </div>
-                    <div className="text-right">
+                    <div className="text-left sm:text-right">
                       <p className="font-bold text-lg">{formatCurrency(taxCalculation.finalTax)}</p>
                       {taxCalculation.recommendedOption === 'final' && (
                         <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-teal-100 text-teal-800">
@@ -136,7 +136,7 @@ export function Dashboard({ taxCalculation, onNavigate }: DashboardProps) {
               </div>
 
               <div className="mt-6 pt-6 border-t border-gray-200">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <span className="text-sm text-gray-600">Potensi Penghematan:</span>
                   <span className="font-bold text-green-600">
                     {formatCurrency(Math.abs(taxCalculation.progressiveTax - taxCalculation.finalTax))}
@@ -148,25 +148,25 @@ export function Dashboard({ taxCalculation, onNavigate }: DashboardProps) {
             <Card>
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Rincian Penghasilan</h3>
               <div className="space-y-3">
-                <div className="flex justify-between">
+                <div className="flex justify-between items-center">
                   <span className="text-gray-600">Penghasilan Kotor</span>
-                  <span className="font-medium">{formatCurrency(taxCalculation.grossIncome)}</span>
+                  <span className="font-medium text-right">{formatCurrency(taxCalculation.grossIncome)}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between items-center">
                   <span className="text-gray-600">Biaya Operasional</span>
-                  <span className="font-medium">-{formatCurrency(taxCalculation.operationalCosts)}</span>
+                  <span className="font-medium text-right">-{formatCurrency(taxCalculation.operationalCosts)}</span>
                 </div>
-                <div className="flex justify-between border-t pt-3">
+                <div className="flex justify-between items-center border-t pt-3">
                   <span className="text-gray-600">Penghasilan Bersih</span>
-                  <span className="font-medium">{formatCurrency(taxCalculation.netIncome)}</span>
+                  <span className="font-medium text-right">{formatCurrency(taxCalculation.netIncome)}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between items-center">
                   <span className="text-gray-600">PTKP (Penghasilan Tidak Kena Pajak)</span>
-                  <span className="font-medium">-{formatCurrency(taxCalculation.ptkp)}</span>
+                  <span className="font-medium text-right">-{formatCurrency(taxCalculation.ptkp)}</span>
                 </div>
-                <div className="flex justify-between border-t pt-3 font-bold">
+                <div className="flex justify-between items-center border-t pt-3 font-bold">
                   <span className="text-gray-900">Penghasilan Kena Pajak</span>
-                  <span>{formatCurrency(taxCalculation.taxableIncome)}</span>
+                  <span className="text-right">{formatCurrency(taxCalculation.taxableIncome)}</span>
                 </div>
               </div>
             </Card>
@@ -175,7 +175,7 @@ export function Dashboard({ taxCalculation, onNavigate }: DashboardProps) {
           {/* Quick Actions */}
           <Card>
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Aksi Cepat</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <Button variant="outline" onClick={() => onNavigate('simulation')}>
                 <Calculator className="mr-2 h-4 w-4" />
                 Jalankan Simulasi
