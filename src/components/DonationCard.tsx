@@ -25,7 +25,7 @@ export function DonationCard() {
       <div className="p-3 sm:p-4">
         <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-2">Dukung Reviotax</h3>
         <p className="text-xs sm:text-sm text-gray-600 mb-3 leading-relaxed line-clamp-3">
-          Reviotax dibuat gratis untuk freelancer & creator Indonesia.
+          App ini dibuat gratis untuk freelancer & creator Indonesia.
           <span className="hidden sm:inline"> Donasi kamu akan membantu biaya domain & pengembangan fitur baru 🙌</span>
         </p>
         <Button 
