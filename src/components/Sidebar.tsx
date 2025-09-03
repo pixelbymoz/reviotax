@@ -82,9 +82,9 @@ export function Sidebar({ currentPage, onPageChange, isMobileOpen, onMobileToggl
       </nav>
 
       {/* Footer */}
-      <div className="px-4 py-4 border-t border-gray-200 mt-auto">
+   {/*   <div className="px-4 py-4 border-t border-gray-200 mt-auto">
         <DonationCard />
-      </div>
+      </div>*/}
     </div>
   );
 }
