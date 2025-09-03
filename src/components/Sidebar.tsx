@@ -9,7 +9,7 @@ import {
   Calculator,
   X
 } from 'lucide-react';
-import { DonationCard } from './DonationCard';
+//import { DonationCard } from './DonationCard';
 import { NavigationPage } from '../types';
 
 interface SidebarProps {
