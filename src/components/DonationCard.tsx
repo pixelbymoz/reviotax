@@ -5,7 +5,7 @@ import { Heart } from 'lucide-react';
 
 export function DonationCard() {
   const handleDonateClick = () => {
-    window.open('https://example.com/donate', '_blank');
+    window.open('https://saweria.co/pixelbymoz', '_blank');
   };
 
   return (
