@@ -7,8 +7,6 @@ import {
   Bell, 
   Info,
   Calculator,
-  MoveUpRight,
-  ArrowUpRight,
   X
 } from 'lucide-react';
 import { DonationCard } from './DonationCard';
