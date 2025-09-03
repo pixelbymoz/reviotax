@@ -7,10 +7,9 @@ import {
   Bell, 
   Info,
   Calculator,
-  MoveUpRight,
-  ArrowUpRight,
   X
 } from 'lucide-react';
+import { DonationCard } from './DonationCard';
 import { NavigationPage } from '../types';
 
 interface SidebarProps {
@@ -83,17 +82,8 @@ export function Sidebar({ currentPage, onPageChange, isMobileOpen, onMobileToggl
       </nav>
 
       {/* Footer */}
-      <div className="px-4 py-4 border-t border-gray-200">
-        <div className="bg-gray-50 rounded-lg p-4">
-          <h3 className="text-sm font-medium text-gray-900 mb-1">Butuh Bantuan?</h3>
-          <p className="text-xs text-gray-600 mb-3">
-            Dapatkan bantuan perhitungan pajak dan regulasi perpajakan Indonesia.
-          </p>
-          <button  onClick={() => window.open("https://pajak.go.id/id", "_blank")}
-            className="w-full flex items-center justify-center gap-2 bg-teal-500 text-white text-xs font-medium py-2 px-3 rounded-md hover:bg-teal-600 transition-all duration-200 hover:scale-105">
-            Hubungi DJP Online <ArrowUpRight className="h-4 w-4" />
-          </button>
-        </div>
+      <div className="px-4 py-4 border-t border-gray-200 mt-auto">
+        <DonationCard />
       </div>
     </div>
   );
