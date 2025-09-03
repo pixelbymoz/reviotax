@@ -10,17 +10,18 @@ export function DonationCard() {
 
   return (
     <Card className="overflow-hidden p-0 bg-white border border-gray-200 shadow-sm">
-      {/* Top gradient section inspired by the uploaded design */}
-      <div className="h-20 bg-gradient-to-br from-teal-400 via-cyan-400 to-blue-400 relative overflow-hidden">
-        {/* Abstract shapes for visual interest */}
+      {/* Compact gradient section */}
+      <div className="h-12 sm:h-16 bg-gradient-to-br from-teal-400 via-cyan-400 to-blue-400 relative overflow-hidden">
+        {/* Simplified abstract shapes */}
         <div className="absolute inset-0">
-          <div className="absolute top-2 right-4 w-12 h-12 bg-white/15 rounded-full blur-sm"></div>
-          <div className="absolute bottom-2 left-4 w-8 h-8 bg-white/25 rounded-full blur-sm"></div>
+          <div className="absolute top-1 right-2 w-6 h-6 bg-white/15 rounded-full blur-sm"></div>
+          <div className="absolute bottom-1 left-2 w-4 h-4 bg-white/25 rounded-full blur-sm"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Heart className="h-8 w-8 text-white/70" />
+            <Heart className="h-5 w-5 sm:h-6 sm:w-6 text-white/70" />
           </div>
         </div>
       </div>
+
 
       <div className="p-4">
         <h3 className="text-base font-semibold text-gray-900 mb-3">Dukung Reviotax</h3>
@@ -32,7 +33,8 @@ export function DonationCard() {
           className="w-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white border-0 shadow-md hover:shadow-lg transition-all duration-200"
           size="sm"
         >
-          Donasi Sekarang
+          <Heart className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+          <span className="text-xs sm:text-sm">Donasi</span>
         </Button>
       </div>
     </Card>
