@@ -11,13 +11,13 @@ export function DonationCard() {
   return (
     <Card className="overflow-hidden p-0 bg-white border border-gray-200 shadow-sm">
       {/* Top gradient section inspired by the uploaded design */}
-      <div className="h-20 bg-gradient-to-br from-purple-400 via-pink-400 to-orange-300 relative overflow-hidden">
+      <div className="h-20 bg-gradient-to-br from-teal-400 via-cyan-400 to-blue-400 relative overflow-hidden">
         {/* Abstract shapes for visual interest */}
         <div className="absolute inset-0">
-          <div className="absolute top-2 right-4 w-12 h-12 bg-white/20 rounded-full blur-sm"></div>
-          <div className="absolute bottom-2 left-4 w-8 h-8 bg-white/30 rounded-full blur-sm"></div>
+          <div className="absolute top-2 right-4 w-12 h-12 bg-white/15 rounded-full blur-sm"></div>
+          <div className="absolute bottom-2 left-4 w-8 h-8 bg-white/25 rounded-full blur-sm"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Heart className="h-8 w-8 text-white/80" />
+            <Heart className="h-8 w-8 text-white/70" />
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@ export function DonationCard() {
         </p>
         <Button 
           onClick={handleDonateClick} 
-          className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0 shadow-md hover:shadow-lg transition-all duration-200"
+          className="w-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white border-0 shadow-md hover:shadow-lg transition-all duration-200"
           size="sm"
         >
           Donasi Sekarang
