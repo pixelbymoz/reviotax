@@ -22,11 +22,11 @@ export function DonationCard() {
         </div>
       </div>
 
-      <div className="p-3 sm:p-4">
-        <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-2">Dukung Reviotax</h3>
-        <p className="text-xs sm:text-sm text-gray-600 mb-3 leading-relaxed line-clamp-3">
-          App ini dibuat gratis untuk freelancer & creator Indonesia.
-          <span className="hidden sm:inline"> Donasi kamu akan membantu biaya domain & pengembangan fitur baru 🙌</span>
+
+      <div className="p-4">
+        <h3 className="text-base font-semibold text-gray-900 mb-3">Dukung Reviotax</h3>
+        <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+          Donasi kamu akan membantu biaya domain & pengembangan fitur baru 🙌
         </p>
         <Button 
           onClick={handleDonateClick} 
