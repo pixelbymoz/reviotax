@@ -95,7 +95,7 @@ export function DonationModal({ isOpen, onClose }: DonationModalProps) {
           {/* Additional info */}
           <div className="mt-4 pt-4 border-t border-gray-100">
             <p className="text-xs text-gray-500 text-center">
-              Reviotax dibuat gratis untuk freelancer & creator Indonesia
+              Reviotax dibuat gratis untuk freelancer & content creator Indonesia
             </p>
           </div>
         </div>
