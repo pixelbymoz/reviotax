@@ -96,8 +96,8 @@ export function Sidebar({ currentPage, onPageChange, isMobileOpen, onMobileToggl
             </button>
           </div>
         </div>
-      </div>
         </nav>
+      </div>
       {/* Donation Modal */}
       <DonationModal 
         isOpen={isDonationModalOpen} 
