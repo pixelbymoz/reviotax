@@ -21,7 +21,7 @@ export function DonationModal({ isOpen, onClose }: DonationModalProps) {
   };
 
   const handlePaypalClick = () => {
-    window.open('https://paypal.me/pixelbymoz', '_blank');
+    window.open('#');
   };
 
   const handleBackdropClick = (e: React.MouseEvent) => {
