@@ -10,6 +10,12 @@ interface DonationModalProps {
 export function DonationModal({ isOpen, onClose }: DonationModalProps) {
   if (!isOpen) return null;
 
+  const handleCloseClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onClose();
+  };
+
   const handleSaweriaClick = () => {
     window.open('https://saweria.co/pixelbymoz', '_blank');
   };
@@ -34,8 +40,9 @@ export function DonationModal({ isOpen, onClose }: DonationModalProps) {
         <div className="relative h-24 bg-gradient-to-br from-teal-400 via-cyan-400 to-blue-400 rounded-t-2xl overflow-hidden">
           {/* Close button */}
           <button
-            onClick={onClose}
-            className="absolute top-4 right-4 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
+            onClick={handleCloseClick}
+            className="absolute top-4 right-4 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-all duration-200 z-10"
+            aria-label="Tutup modal"
           >
             <X className="h-4 w-4 text-white" />
           </button>
