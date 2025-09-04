@@ -7,9 +7,10 @@ import {
   Bell, 
   Info,
   Calculator,
-  X
+  X,
+  Heart
 } from 'lucide-react';
-import { DonationCard } from './DonationCard';
+import { DonationModal } from './DonationModal';
 import { NavigationPage } from '../types';
 
 interface SidebarProps {
@@ -30,61 +31,78 @@ const navigation = [
 ];
 
 export function Sidebar({ currentPage, onPageChange, isMobileOpen, onMobileToggle }: SidebarProps) {
+  const [isDonationModalOpen, setIsDonationModalOpen] = React.useState(false);
+
   return (
-    <div className={`flex h-screen w-64 flex-col bg-white border-r border-gray-200 fixed left-0 top-0 z-50 transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${
-      isMobileOpen ? 'translate-x-0' : '-translate-x-full'
-    }`}>
-      {/* Logo */}
-      <div className="flex items-center px-6 py-4 border-b border-gray-200">
-        {/* Mobile close button */}
-        <button
-          onClick={() => onMobileToggle(false)}
-          className="lg:hidden absolute right-4 top-4 p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
-        >
-          <X className="h-5 w-5" />
-        </button>
-        
-        <div className="flex items-center space-x-3">
-          <div className="bg-teal-500 rounded-lg p-2 flex items-center justify-center w-10 h-10">
-            <span className="text-white font-bold text-xl">R</span>
+    <>
+      <div className={`flex h-screen w-64 flex-col bg-white border-r border-gray-200 fixed left-0 top-0 z-50 transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${
+        isMobileOpen ? 'translate-x-0' : '-translate-x-full'
+      }`}>
+        {/* Logo */}
+        <div className="flex items-center px-6 py-4 border-b border-gray-200">
+          {/* Mobile close button */}
+          <button
+            onClick={() => onMobileToggle(false)}
+            className="lg:hidden absolute right-4 top-4 p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          
+          <div className="flex items-center space-x-3">
+            <div className="bg-teal-500 rounded-lg p-2 flex items-center justify-center w-10 h-10">
+              <span className="text-white font-bold text-xl">R</span>
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-gray-900">Reviotax</h1>
+              <p className="text-xs text-gray-500">Kalkulator Pajak Online</p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-xl font-bold text-gray-900">Reviotax</h1>
-            <p className="text-xs text-gray-500">Kalkulator Pajak Online</p>
+        </div>
+
+
+        {/* Navigation */}
+        <nav className="flex-1 px-4 py-6">
+          <ul className="space-y-2">
+            {navigation.map((item) => {
+              const Icon = item.icon;
+              const isActive = currentPage === item.id;
+              
+              return (
+                <li key={item.id}>
+                  <button
+                    onClick={() => onPageChange(item.id)}
+                    className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 ${
+                      isActive
+                        ? 'bg-teal-50 text-teal-700 border-r-2 border-teal-500 shadow-sm'
+                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                    }`}
+                  >
+                    <Icon className={`mr-3 h-5 w-5 transition-colors ${isActive ? 'text-teal-500' : 'text-gray-400'}`} />
+                    {item.name}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        {/* Separator and Donation Button */}
+        <div className="px-4 pb-4 mt-auto">
+          <div className="border-t border-gray-200 pt-4">
+            <button
+              onClick={() => setIsDonationModalOpen(true)}
+              className="w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg bg-gradient-to-r from-pink-500 to-rose-500 text-white hover:from-pink-600 hover:to-rose-600 transition-all duration-200 hover:scale-105 shadow-md hover:shadow-lg"
+            >
+              <Heart className="mr-3 h-4 w-4" />
+              Dukung Reviotax
+            </button>
           </div>
         </div>
       </div>
-
-      {/* Navigation */}
-      <nav className="flex-1 px-4 py-6">
-        <ul className="space-y-2">
-          {navigation.map((item) => {
-            const Icon = item.icon;
-            const isActive = currentPage === item.id;
-            
-            return (
-              <li key={item.id}>
-                <button
-                  onClick={() => onPageChange(item.id)}
-                  className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 ${
-                    isActive
-                      ? 'bg-teal-50 text-teal-700 border-r-2 border-teal-500 shadow-sm'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                  }`}
-                >
-                  <Icon className={`mr-3 h-5 w-5 transition-colors ${isActive ? 'text-teal-500' : 'text-gray-400'}`} />
-                  {item.name}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-
-      {/* Footer */}
-   {/*   <div className="px-4 py-4 border-t border-gray-200 mt-auto">
-        <DonationCard />
-      </div>*/}
-    </div>
+        </nav>
+      {/* Donation Modal */}
+      <DonationModal 
+        isOpen={isDonationModalOpen} 
+        onClose={() => setIsDonationModalOpen(false)} 
+      />
+    </>
   );
 }
