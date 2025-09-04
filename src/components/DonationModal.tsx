@@ -81,7 +81,7 @@ export function DonationModal({ isOpen, onClose }: DonationModalProps) {
             <Button
               onClick={handlePaypalClick}
               variant="outline"
-              className="w-full border-2 border-blue-500 text-blue-600 hover:bg-blue-50 shadow-sm hover:shadow-md transition-all duration-200"
+              className="w-full border-2 border-blue-500 text-blue-600 hover:bg-blue-50 shadow-sm hover:shadow-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
               size="lg"
             >
               <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
