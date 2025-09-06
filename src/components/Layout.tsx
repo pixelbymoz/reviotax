@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Sidebar } from './Sidebar';
+import { DesktopHeader } from './DesktopHeader';
 import { NavigationPage } from '../types';
 
 interface LayoutProps {
@@ -47,6 +48,9 @@ export function Layout({ currentPage, onPageChange, children }: LayoutProps) {
       />
       
       <main className="flex-1 overflow-auto bg-gray-50 lg:ml-64">
+        {/* Desktop header */}
+        <DesktopHeader currentPage={currentPage} onPageChange={handlePageChange} />
+        
         {/* Mobile header */}
         <div className="lg:hidden bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between sticky top-0 z-30">
           <button
