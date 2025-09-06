@@ -42,4 +42,14 @@ export interface TaxBracket {
   amount: number;
 }
 
-export type NavigationPage = 'dashboard' | 'onboarding' | 'income' | 'reports' | 'simulation' | 'reminders' | 'about';
+export type NavigationPage = 'dashboard' | 'onboarding' | 'income' | 'reports' | 'simulation' | 'reminders' | 'about' | 'whats-new';
+
+export interface UpdateItem {
+  id: string;
+  version: string;
+  date: string;
+  status: 'new' | 'updated' | 'fixed';
+  title: string;
+  description: string;
+  features: string[];
+}

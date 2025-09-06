@@ -8,7 +8,8 @@ import {
   Info,
   Calculator,
   X,
-  Heart
+  Heart,
+  Sparkles
 } from 'lucide-react';
 import { DonationModal } from './DonationModal';
 import { NavigationPage } from '../types';
@@ -84,6 +85,25 @@ export function Sidebar({ currentPage, onPageChange, isMobileOpen, onMobileToggl
               );
             })}
           </ul>
+        
+        {/* What's New Section - Mobile Only */}
+        <div className="lg:hidden mt-6 pt-4 border-t border-gray-200">
+          <button
+            onClick={() => onPageChange('whats-new')}
+            className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 ${
+              currentPage === 'whats-new'
+                ? 'bg-purple-50 text-purple-700 border-r-2 border-purple-500 shadow-sm'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+            }`}
+          >
+            <Sparkles className={`mr-3 h-5 w-5 transition-colors ${currentPage === 'whats-new' ? 'text-purple-500' : 'text-gray-400'}`} />
+            What's New
+            <span className="ml-auto inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+              New
+            </span>
+          </button>
+        </div>
+        
         {/* Separator and Donation Button */}
         <div className="px-4 pb-4 mt-auto">
           <div className="border-t border-gray-200 pt-4">
