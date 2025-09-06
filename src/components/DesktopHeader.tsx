@@ -11,8 +11,11 @@ export function DesktopHeader({ currentPage, onPageChange }: DesktopHeaderProps)
   return (
     <div className="hidden lg:block bg-white border-b border-gray-200 px-6 py-4 sticky top-0 z-30">
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-1">
-          {/* Navigation items for desktop header */}
+        <div className="flex-1">
+          {/* Left side - can be used for breadcrumbs or page title in the future */}
+        </div>
+
+        <div className="flex items-center space-x-4">
           <button
             onClick={() => onPageChange('whats-new')}
             className={`flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 ${
@@ -28,13 +31,6 @@ export function DesktopHeader({ currentPage, onPageChange }: DesktopHeaderProps)
               New
             </span>
           </button>
-        </div>
-
-        <div className="flex items-center space-x-4">
-          {/* Future: Notifications, user menu, etc. */}
-          <div className="text-sm text-gray-500">
-            Kalkulator Pajak untuk Freelancer & Content Creator
-          </div>
         </div>
       </div>
     </div>
