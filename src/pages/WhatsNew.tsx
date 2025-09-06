@@ -8,7 +8,7 @@ export function WhatsNew() {
     {
       id: '1',
       version: '1.0.0',
-      date: '2024-01-15',
+      date: '2025-09-02',
       status: 'new',
       title: 'Peluncuran Reviotax',
       description: 'Kalkulator pajak online pertama yang dirancang khusus untuk freelancer dan content creator Indonesia.',
