@@ -7,6 +7,7 @@ import { Simulation } from './pages/Simulation';
 import { Reports } from './pages/Reports';
 import { About } from './pages/About';
 import { WhatsNew } from './pages/WhatsNew';
+import { Feedback } from './pages/Feedback';
 import { NavigationPage, UserProfile, IncomeSource, OperationalCost, TaxCalculation } from './types';
 import { calculateTax } from './utils/taxCalculations';
 
@@ -101,6 +102,8 @@ function App() {
         return <About />;
       case 'whats-new':
         return <WhatsNew />;
+      case 'feedback':
+        return <Feedback />;
       default:
         return <Dashboard taxCalculation={taxCalculation} onNavigate={handlePageChange} />;
     }

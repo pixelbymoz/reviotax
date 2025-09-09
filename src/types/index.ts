@@ -43,6 +43,7 @@ export interface TaxBracket {
 }
 
 export type NavigationPage = 'dashboard' | 'onboarding' | 'income' | 'reports' | 'simulation' | 'reminders' | 'about' | 'whats-new';
+export type NavigationPage = 'dashboard' | 'onboarding' | 'income' | 'reports' | 'simulation' | 'reminders' | 'about' | 'whats-new' | 'feedback';
 
 export interface UpdateItem {
   id: string;
