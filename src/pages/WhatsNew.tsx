@@ -8,10 +8,10 @@ export function WhatsNew() {
     {
       id: '1',
       version: '1.0.0',
-      date: '2025-09-02',
+      date: '2024-01-15',
       status: 'new',
       title: 'Peluncuran Reviotax',
-      description: 'Kalkulator pajak online yang dirancang khusus untuk freelancer dan content creator Indonesia.',
+      description: 'Kalkulator pajak online pertama yang dirancang khusus untuk freelancer dan content creator Indonesia.',
       features: [
         'Perhitungan PTKP yang akurat berdasarkan status pernikahan',
         'Perbandingan pajak Progresif vs Final',
