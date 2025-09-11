@@ -99,9 +99,6 @@ export function Sidebar({ currentPage, onPageChange, isMobileOpen, onMobileToggl
           >
             <Sparkles className={`mr-3 h-5 w-5 transition-colors ${currentPage === 'whats-new' ? 'text-purple-500' : 'text-gray-400'}`} />
             What's New
-            <span className="ml-auto inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-              New
-            </span>
           </button>
           
           <button
