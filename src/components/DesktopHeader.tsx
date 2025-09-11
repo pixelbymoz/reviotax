@@ -38,10 +38,6 @@ export function DesktopHeader({ currentPage, onPageChange }: DesktopHeaderProps)
           >
             <Sparkles className={`mr-2 h-4 w-4 ${currentPage === 'whats-new' ? 'text-purple-500' : 'text-gray-400'}`} />
             What's New
-            {/* New indicator badge */}
-            <span className="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-              New
-            </span>
           </button>
         </div>
       </div>
