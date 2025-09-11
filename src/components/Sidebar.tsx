@@ -29,7 +29,7 @@ const navigation = [
   { id: 'simulation' as NavigationPage, name: 'Simulasi', icon: Calculator },
   { id: 'reports' as NavigationPage, name: 'Laporan Pajak', icon: FileText },
 //  { id: 'reminders' as NavigationPage, name: 'Pengingat', icon: Bell },
-//  { id: 'feedback' as NavigationPage, name: 'Feedback', icon: MessageSquare },
+  { id: 'feedback' as NavigationPage, name: 'Feedback', icon: MessageSquare },
   { id: 'about' as NavigationPage, name: 'Tentang', icon: Info },
 ];
 
