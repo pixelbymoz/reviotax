@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Bell } from 'lucide-react';
+import { Sparkles, Bell, MessageSquare } from 'lucide-react';
 import { NavigationPage } from '../types';
 
 interface DesktopHeaderProps {
@@ -16,6 +16,18 @@ export function DesktopHeader({ currentPage, onPageChange }: DesktopHeaderProps)
         </div>
 
         <div className="flex items-center space-x-4">
+          <button
+            onClick={() => onPageChange('feedback')}
+            className={`flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 ${
+              currentPage === 'feedback'
+                ? 'bg-teal-50 text-teal-700 shadow-sm'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+            }`}
+          >
+            <MessageSquare className={`mr-2 h-4 w-4 ${currentPage === 'feedback' ? 'text-teal-500' : 'text-gray-400'}`} />
+            Feedback
+          </button>
+          
           <button
             onClick={() => onPageChange('whats-new')}
             className={`flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 ${
