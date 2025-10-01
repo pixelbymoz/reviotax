@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/send-feedback.ts": {
+      "runtime": "edge"
+    }
+  }
+}
