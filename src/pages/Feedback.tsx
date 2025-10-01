@@ -77,34 +77,21 @@ export function Feedback() {
     setIsSubmitting(true);
 
     try {
-      // Create email content
-      const selectedCategory = categories.find(cat => cat.value === formData.category);
-      const emailSubject = `[Reviotax Feedback] ${selectedCategory?.label} - ${formData.subject}`;
-      
-      const emailBody = `
-Feedback Baru dari Reviotax
+      // Send feedback via API
+      const response = await fetch('/api/send-feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-Nama: ${formData.name}
-Email: ${formData.email}
-Kategori: ${selectedCategory?.label}
-Rating: ${formData.rating > 0 ? `${formData.rating}/5 bintang` : 'Tidak ada rating'}
+      const result = await response.json();
 
-Subjek: ${formData.subject}
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send feedback');
+      }
 
-Pesan:
-${formData.message}
-
----
-Dikirim dari Reviotax Feedback Form
-Waktu: ${new Date().toLocaleString('id-ID')}
-      `.trim();
-
-      // Create mailto link
-      const mailtoLink = `mailto:pixelbymoz@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-      
-      // Open email client
-      window.location.href = mailtoLink;
-      
       // Show success state
       setIsSubmitted(true);
       
@@ -119,11 +106,11 @@ Waktu: ${new Date().toLocaleString('id-ID')}
           rating: 0
         });
         setIsSubmitted(false);
-      }, 3000);
+      }, 5000);
 
     } catch (error) {
       console.error('Error sending feedback:', error);
-      alert('Terjadi kesalahan saat mengirim feedback. Silakan coba lagi.');
+      alert(`Terjadi kesalahan saat mengirim feedback: ${error instanceof Error ? error.message : 'Unknown error'}. Silakan coba lagi.`);
     } finally {
       setIsSubmitting(false);
     }
@@ -173,7 +160,7 @@ Waktu: ${new Date().toLocaleString('id-ID')}
               <CheckCircle className="mx-auto h-16 w-16 text-green-500 mb-6" />
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Terima Kasih!</h2>
               <p className="text-gray-600 mb-6">
-                Feedback Anda telah dikirim. Email client akan terbuka untuk mengirim pesan ke pixelbymoz@gmail.com
+                Feedback Anda telah berhasil dikirim ke pixelbymoz@gmail.com
               </p>
               <p className="text-sm text-gray-500">
                 Kami sangat menghargai masukan Anda untuk pengembangan Reviotax ke depannya.
@@ -432,7 +419,7 @@ Waktu: ${new Date().toLocaleString('id-ID')}
               <div>
                 <h3 className="font-semibold text-teal-900 mb-2">Tentang Feedback Anda</h3>
                 <div className="text-sm text-teal-800 space-y-1">
-                  <p>• Feedback akan dikirim langsung ke email developer (pixelbymoz@gmail.com)</p>
+                  <p>• Feedback akan dikirim langsung ke pixelbymoz@gmail.com</p>
                   <p>• Kami akan merespons dalam 1-3 hari kerja</p>
                   <p>• Semua saran dan masukan sangat berharga untuk pengembangan Reviotax</p>
                   <p>• Data pribadi Anda hanya digunakan untuk komunikasi terkait feedback</p>
