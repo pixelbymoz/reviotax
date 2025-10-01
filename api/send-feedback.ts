@@ -1,7 +1,5 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export const runtime = 'edge';
 
 interface FeedbackData {
@@ -60,6 +58,24 @@ export default async function handler(req: Request) {
   }
 
   try {
+    // Initialize Resend inside the handler to avoid cold start issues
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    
+    // Check if API key exists
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY not found');
+      return new Response(
+        JSON.stringify({ error: 'Server configuration error' }),
+        { 
+          status: 500,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          }
+        }
+      );
+    }
+
     const feedbackData: FeedbackData = await req.json();
     
     // Validate required fields
@@ -97,82 +113,8 @@ export default async function handler(req: Request) {
     // Create email content
     const emailSubject = `${categoryEmoji} [Reviotax Feedback] ${categoryLabel} - ${feedbackData.subject}`;
     
-    const emailHtml = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta charset="utf-8">
-          <style>
-            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
-            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { background: linear-gradient(135deg, #14b8a6, #06b6d4); color: white; padding: 20px; border-radius: 8px 8px 0 0; text-align: center; }
-            .content { background: #f9fafb; padding: 20px; border: 1px solid #e5e7eb; }
-            .footer { background: #374151; color: white; padding: 15px; border-radius: 0 0 8px 8px; text-align: center; font-size: 12px; }
-            .field { margin-bottom: 15px; }
-            .label { font-weight: 600; color: #374151; margin-bottom: 5px; display: block; }
-            .value { background: white; padding: 10px; border-radius: 4px; border: 1px solid #d1d5db; }
-            .category-badge { display: inline-block; background: #14b8a6; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-            .rating { color: #f59e0b; }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="header">
-              <h1>🚀 Feedback Baru dari Reviotax</h1>
-              <p>Feedback dari pengguna aplikasi kalkulator pajak</p>
-            </div>
-            
-            <div class="content">
-              <div class="field">
-                <span class="label">Kategori:</span>
-                <div class="value">
-                  <span class="category-badge">${categoryEmoji} ${categoryLabel}</span>
-                </div>
-              </div>
-              
-              <div class="field">
-                <span class="label">Nama:</span>
-                <div class="value">${feedbackData.name}</div>
-              </div>
-              
-              <div class="field">
-                <span class="label">Email:</span>
-                <div class="value">${feedbackData.email}</div>
-              </div>
-              
-              <div class="field">
-                <span class="label">Subjek:</span>
-                <div class="value">${feedbackData.subject}</div>
-              </div>
-              
-              ${feedbackData.rating > 0 ? `
-              <div class="field">
-                <span class="label">Rating Pengalaman:</span>
-                <div class="value">
-                  <span class="rating">${'⭐'.repeat(feedbackData.rating)}</span> 
-                  (${feedbackData.rating}/5 bintang)
-                </div>
-              </div>
-              ` : ''}
-              
-              <div class="field">
-                <span class="label">Pesan:</span>
-                <div class="value" style="white-space: pre-wrap;">${feedbackData.message}</div>
-              </div>
-            </div>
-            
-            <div class="footer">
-              <p>Dikirim dari Reviotax Feedback Form</p>
-              <p>Waktu: ${new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })} WIB</p>
-              <p>Domain: reviotax.vercel.app</p>
-            </div>
-          </div>
-        </body>
-      </html>
-    `;
-
-    const emailText = `
-Feedback Baru dari Reviotax
+    // Simplified email content to reduce processing time
+    const emailText = `Feedback Baru dari Reviotax
 
 Kategori: ${categoryLabel}
 Nama: ${feedbackData.name}
@@ -184,25 +126,22 @@ Pesan:
 ${feedbackData.message}
 
 ---
-Dikirim dari Reviotax Feedback Form
-Waktu: ${new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })} WIB
-Domain: reviotax.vercel.app
-    `.trim();
+Dikirim: ${new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })} WIB`;
 
     // Send email using Resend
-    const { data, error } = await resend.emails.send({
-      from: 'Reviotax Feedback <noreply@reviotax.vercel.app>',
+    console.log('Sending email with Resend...');
+    const emailResult = await resend.emails.send({
+      from: 'onboarding@resend.dev', // Use Resend's default domain
       to: ['pixelbymoz@gmail.com'],
       replyTo: feedbackData.email,
       subject: emailSubject,
-      html: emailHtml,
       text: emailText,
     });
 
-    if (error) {
-      console.error('Resend error:', error);
+    if (emailResult.error) {
+      console.error('Resend error:', emailResult.error);
       return new Response(
-        JSON.stringify({ error: 'Failed to send email', details: error }),
+        JSON.stringify({ error: 'Failed to send email', details: emailResult.error }),
         { 
           status: 500,
           headers: {
@@ -213,11 +152,13 @@ Domain: reviotax.vercel.app
       );
     }
 
+    console.log('Email sent successfully:', emailResult.data);
+
     return new Response(
       JSON.stringify({ 
         success: true, 
         message: 'Feedback berhasil dikirim!',
-        emailId: data?.id 
+        emailId: emailResult.data?.id 
       }),
       { 
         status: 200,
