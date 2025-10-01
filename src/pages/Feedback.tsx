@@ -78,7 +78,7 @@ export function Feedback() {
 
     try {
       // Send feedback via API
-      const response = await fetch('/api/send-feedback', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'https://reviotax.vercel.app'}/api/send-feedback`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
