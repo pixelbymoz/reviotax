@@ -1,7 +1,5 @@
 {
-  "functions": {
-    "api/send-feedback.ts": {
-      "runtime": "edge"
-    }
-  }
+  "builds": [
+    { "src": "package.json", "use": "@vercel/static-build" }
+  ]
 }
