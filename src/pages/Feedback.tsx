@@ -86,38 +86,14 @@ export function Feedback() {
         body: JSON.stringify(formData),
       });
 
-      // Check if response is ok and has JSON content
       if (!response.ok) {
-        let errorMessage = 'Failed to send feedback';
-        
-        // Try to get error message from response
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-          try {
-            const result = await response.json();
-            errorMessage = result.error || errorMessage;
-          } catch {
-            // If JSON parsing fails, use default message
-          }
-        } else {
-          // If not JSON, try to get text response
-          try {
-            const text = await response.text();
-            if (text) errorMessage = text;
-          } catch {
-            // Use default error message
-          }
-        }
-        
-        throw new Error(errorMessage);
+        const errorText = await response.text();
+        throw new Error(errorText || `HTTP ${response.status}: ${response.statusText}`);
       }
 
-      // Parse JSON response only if content-type indicates JSON
-      const contentType = response.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
-        const result = await response.json();
-        // You can use result here if needed
-      }
+      // Try to parse JSON response
+      const result = await response.json();
+      console.log('Feedback sent successfully:', result);
 
       // Show success state
       setIsSubmitted(true);
