@@ -1,5 +1,4 @@
 import { Resend } from 'resend';
-import { NextRequest, NextResponse } from 'next/server';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -34,10 +33,10 @@ const getCategoryEmoji = (category: string) => {
   }
 };
 
-export default async function handler(req: NextRequest) {
+export default async function handler(req: Request) {
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
-    return new NextResponse(null, {
+    return new Response(null, {
       status: 200,
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -48,9 +47,15 @@ export default async function handler(req: NextRequest) {
   }
 
   if (req.method !== 'POST') {
-    return NextResponse.json(
-      { error: 'Method not allowed' },
-      { status: 405 }
+    return new Response(
+      JSON.stringify({ error: 'Method not allowed' }),
+      { 
+        status: 405,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        }
+      }
     );
   }
 
@@ -59,18 +64,30 @@ export default async function handler(req: NextRequest) {
     
     // Validate required fields
     if (!feedbackData.name || !feedbackData.email || !feedbackData.subject || !feedbackData.message) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
+      return new Response(
+        JSON.stringify({ error: 'Missing required fields' }),
+        { 
+          status: 400,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          }
+        }
       );
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(feedbackData.email)) {
-      return NextResponse.json(
-        { error: 'Invalid email format' },
-        { status: 400 }
+      return new Response(
+        JSON.stringify({ error: 'Invalid email format' }),
+        { 
+          status: 400,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          }
+        }
       );
     }
 
@@ -184,21 +201,28 @@ Domain: reviotax.vercel.app
 
     if (error) {
       console.error('Resend error:', error);
-      return NextResponse.json(
-        { error: 'Failed to send email', details: error },
-        { status: 500 }
+      return new Response(
+        JSON.stringify({ error: 'Failed to send email', details: error }),
+        { 
+          status: 500,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          }
+        }
       );
     }
 
-    return NextResponse.json(
-      { 
+    return new Response(
+      JSON.stringify({ 
         success: true, 
         message: 'Feedback berhasil dikirim!',
         emailId: data?.id 
-      },
+      }),
       { 
         status: 200,
         headers: {
+          'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
         }
       }
@@ -206,9 +230,15 @@ Domain: reviotax.vercel.app
 
   } catch (error) {
     console.error('API error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
-      { status: 500 }
+    return new Response(
+      JSON.stringify({ error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' }),
+      { 
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        }
+      }
     );
   }
 }
